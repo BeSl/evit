@@ -52,6 +52,7 @@ func setAmbassadorRoute(api fiber.Router) {
 	ambassador.Get("products/:id", controllers.GetProduct)
 
 	ambassador.Get("productstop", controllers.ActiveAdvers)
+	ambassador.Get("productstest", controllers.TestAdvOffer)
 
 	ambassadorAuthenticated := ambassador.Use(middlewares.IsAuthenticated)
 	ambassadorAuthenticated.Get("user", controllers.User)

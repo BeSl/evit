@@ -46,6 +46,9 @@
     ]
   },
   "devDependencies": {
+    "@divkitframework/divkit": "^29.1.0",
+    "@divkitframework/react": "^1.1.0",
+    "@gravity-ui/components": "^2.9.2",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "@types/redux": "^3.6.0"

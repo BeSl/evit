@@ -18,3 +18,8 @@ func CreateAdvOffer(c *fiber.Ctx) error {
 
 	return c.JSON(adv)
 }
+
+func TestAdvOffer(c *fiber.Ctx) error {
+
+	return c.JSON(models.ExampleDIV())
+}
