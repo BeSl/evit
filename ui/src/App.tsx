@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Stats from "./pages/Stats";
 import Rankings from "./pages/Rankings";
 import ProductsBackend from "./pages/ProductsBackend";
+import ProductCategories from "./pages/ProductCategories";
 import ProductForm from "./pages/ProductForm";
 import UserWishlist from './pages/UserWishlist';
 import Cart from './pages/Cart';
@@ -19,6 +20,7 @@ function App() {
         <BrowserRouter>
             <Route path={'/'} exact component={ProductsBackend}/>
             <Route path={'/backend'} exact component={ProductsBackend}/>
+            <Route path={'/productscat/:id'} component={ProductCategories}/>
             <Route path={'/login'} component={Login}/>
             <Route path={'/register'} component={Register}/>
             <Route path={'/profile'} component={Profile}/>

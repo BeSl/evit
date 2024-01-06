@@ -15,57 +15,57 @@ import { Dropdown, Space } from 'antd';
 const { Search } = Input;
 const { Header } = Layout;
 
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    type: 'group',
-    // disabled: false,
-    label: 'Золотая коллекция',
-    children: [
-      {
-        key: '1-1',
-        label: 'Браслеты',
-      },
-      {
-        key: '1-2',
-        label: 'Кольца',
-      },
-    ],
-  },
-  {
-    key: '2',
-    label: 'Одежда',
-    children: [
-      {
-        key: '2-1',
-        label: 'Куртки',
-      },
-      {
-        key: '2-2',
-        label: 'Брюки',
-      },
-    ],
-  },
-  {
-    key: '3',
-    label: 'Косметика',
-    // disabled: true,
-    children: [
-      {
-        key: '3-1',
-        label: 'Крем',
-      },
-      {
-        key: '3-2',
-        label: 'Мыло',
-      },
-      {
-        key: '3-2',
-        label: 'Порошок',
-      },
-    ],
-  },
-];
+// const items: MenuProps['items'] = [
+//   {
+//     key: '1',
+//     type: 'group',
+//     // disabled: false,
+//     label: 'Золотая коллекция',
+//     children: [
+//       {
+//         key: '1-1',
+//         label: 'Браслеты',
+//       },
+//       {
+//         key: '1-2',
+//         label: 'Кольца',
+//       },
+//     ],
+//   },
+//   {
+//     key: '2',
+//     label: 'Одежда',
+//     children: [
+//       {
+//         key: '2-1',
+//         label: 'Куртки',
+//       },
+//       {
+//         key: '2-2',
+//         label: 'Брюки',
+//       },
+//     ],
+//   },
+//   {
+//     key: '3',
+//     label: 'Косметика',
+//     // disabled: true,
+//     children: [
+//       {
+//         key: '3-1',
+//         label: 'Крем',
+//       },
+//       {
+//         key: '3-2',
+//         label: 'Мыло',
+//       },
+//       {
+//         key: '3-2',
+//         label: 'Порошок',
+//       },
+//     ],
+//   },
+// ];
 
 
 const headerStyle: React.CSSProperties = {
@@ -77,29 +77,37 @@ const headerStyle: React.CSSProperties = {
   opacity: 50,
   backgroundColor: '#87CEEB',
 };
+
 const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
   message.info('Click on left button.');
   console.log('click left button', e);
 };
 
 const handleMenuClick: MenuProps['onClick'] = (e) => {
-  message.info('Click on menu item.');
+  message.info('Click on menu item.'+ e.key);
+  window.location.assign('/productscat/'+e.key);
   console.log('click', e);
 };
 // const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 
+
+const HeaderM = (props: { user: User }) => {
+  const [current, setCurrent] = useState('mail');
+  const [items, setMenu] = useState();
+//categories
 const menuProps = {
   items,
   onClick: handleMenuClick,
 };
-const HeaderM = (props: { user: User }) => {
-  const [current, setCurrent] = useState('mail');
-  
-
-  
-
   let buttons;
-
+  useEffect(() => {
+    (
+      async () => {
+        const { data } = await axios.get('categories');
+        setMenu(data);
+      }
+    )()
+  }, []);
   if (!props.user?.id) {
     buttons = (
       <p>

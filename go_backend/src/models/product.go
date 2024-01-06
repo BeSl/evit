@@ -47,11 +47,28 @@ type CategoryProduct struct {
 	ExtId  uuid.UUID `json:"uid"`
 	Name   string    `json:"name"`
 	Link   string    `json:"refer"`
-	Active bool      `json:"-"`
+	Active bool      `json:"active"`
 
-	ParrentCategory   *CategoryProduct `json:"parrent_category" gorm:"-"`
-	ParrentExtID      uuid.UUID        `json:"parrent_uid"`
-	ParrentCategoryID uint
+	ParentCategory      *CategoryProduct `json:"child_category" gorm:"-"`
+	ParentCategoryExtID uuid.UUID        `json:"parent_uid"`
 
 	Products []Product `json:"products" gorm:"many2many:collection_products"`
+}
+
+type DataCategorySite struct {
+	Key      string        `json:"key"`
+	Name     string        `json:"label"`
+	Children []ChildrenCat `json:"children"`
+}
+
+type ChildrenCat struct {
+	Key  string `json:"key"`
+	Name string `json:"label"`
+}
+
+type DataCat struct {
+	Parent   string `json:"parent"`
+	Category string `json:"child"`
+	Chid     string
+	Id       string
 }

@@ -61,7 +61,8 @@ func setAmbassadorRoute(api fiber.Router) {
 	ambassador.Get("products/frontend", controllers.ProductsFrontend)
 	ambassador.Get("products/backend", controllers.ProductsBackend)
 	ambassador.Get("products/:id", controllers.GetProduct)
-
+	ambassador.Get("categories", controllers.Categories)
+	ambassador.Get("productscat/:id", controllers.GetProduct)
 	ambassador.Get("banners", controllers.ActiveAdvers)
 	ambassador.Get("productstest", controllers.TestAdvOffer)
 
