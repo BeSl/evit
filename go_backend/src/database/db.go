@@ -32,5 +32,6 @@ func AutoMigrate() {
 		models.AdvOffers{},
 		models.AdversCategory{},
 		models.CollectionProduct{},
+		models.CategoryProduct{},
 	)
 }

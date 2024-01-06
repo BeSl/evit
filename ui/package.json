@@ -1,8 +1,12 @@
 {
   "name": "react-ambassador",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@mui/icons-material": "5.15.2",
+    "@mui/material": "^5.15.2",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.10",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -10,6 +14,7 @@
     "@types/node": "^12.20.7",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
+    "antd": "^5.12.5",
     "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.9.2",
@@ -18,7 +23,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1",
     "redux": "^4.0.5",
+    "styled-components": "^6.1.6",
     "typescript": "^4.2.3",
+    "url": "^0.11.3",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
@@ -46,11 +53,12 @@
     ]
   },
   "devDependencies": {
-    "@divkitframework/divkit": "^29.1.0",
     "@divkitframework/react": "^1.1.0",
-    "@gravity-ui/components": "^2.9.2",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "@types/redux": "^3.6.0"
+  },
+  "browser": {
+    "timers": false
   }
 }

@@ -2,297 +2,174 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { User } from "../models/user";
-import ProductsTOP from '../pages/ProductsTOP';
 import axios from 'axios';
+import { AppstoreOutlined, ContactsOutlined, SendOutlined, UserOutlined, DatabaseTwoTone, HeartTwoTone, ShoppingCartOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Badge, Layout, Menu, Image, Tooltip, Button, Input, Flex, Avatar, message } from 'antd';
 import { AdverOffer } from '../models/adver';
-import {Button} from '@gravity-ui/uikit';
-import { DivKit } from '@divkitframework/react';
-import '@divkitframework/divkit/dist/client.css';
-import { DivJson } from '@divkitframework/divkit/typings/common';
 
-let defaultAdvHeader= {
-    "templates": {
-        "title": {
-            "type": "text",
-            "font_size": 20,
-            "line_height": 24,
-            "paddings": {
-                "left": 24,
-                "right": 24,
-                "bottom": 16
-            }
-        }
-    },
-    "card": {
-        "log_id": "sample_card",
-        "states": [
-            {
-                "state_id": 0,
-                "div": {
-                    "type": "container",
-                    "items": [
-                        {
-                            "type": "title",
-                            "text": "Text properties"
-                        }
-                    ]
-                }
-            }
-        ]
-    }
+import { DownOutlined } from '@ant-design/icons';
+import { Dropdown, Space } from 'antd';
+
+
+const { Search } = Input;
+const { Header } = Layout;
+
+const items: MenuProps['items'] = [
+  {
+    key: '1',
+    type: 'group',
+    // disabled: false,
+    label: 'Золотая коллекция',
+    children: [
+      {
+        key: '1-1',
+        label: 'Браслеты',
+      },
+      {
+        key: '1-2',
+        label: 'Кольца',
+      },
+    ],
+  },
+  {
+    key: '2',
+    label: 'Одежда',
+    children: [
+      {
+        key: '2-1',
+        label: 'Куртки',
+      },
+      {
+        key: '2-2',
+        label: 'Брюки',
+      },
+    ],
+  },
+  {
+    key: '3',
+    label: 'Косметика',
+    // disabled: true,
+    children: [
+      {
+        key: '3-1',
+        label: 'Крем',
+      },
+      {
+        key: '3-2',
+        label: 'Мыло',
+      },
+      {
+        key: '3-2',
+        label: 'Порошок',
+      },
+    ],
+  },
+];
+
+
+const headerStyle: React.CSSProperties = {
+  textAlign: 'center',
+  // color: '#fff',
+  height: 100,
+  paddingInline: 70,
+  lineHeight: '64px',
+  opacity: 50,
+  backgroundColor: '#87CEEB',
+};
+const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  message.info('Click on left button.');
+  console.log('click left button', e);
 };
 
-// defaultAdvHeader = {
-//     "templates": {
-//         "title": {
-//             "type": "text",
-//             "font_size": 20,
-//             "line_height": 24,
-//             "paddings": {
-//                 "bottom": 16,
-//                 "left": 24,
-//                 "right": 24
-//             }
-//         }
-//     },
-//     "card": {
-//         "log_id": "sample_card",
-//         "states": [
-//             {
-//                 "state_id": 0,
-//                 "div": {
-//                     "type": "container",
-//                     "items": [
-//                         {
-//                             "type": "title",
-//                             "text": "Hello From Back!!!"
-//                         }
-//                     ]
-//                 }
-//             }
-//         ]
-//     }
-// };
+const handleMenuClick: MenuProps['onClick'] = (e) => {
+  message.info('Click on menu item.');
+  console.log('click', e);
+};
+// const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 
+const menuProps = {
+  items,
+  onClick: handleMenuClick,
+};
+const HeaderM = (props: { user: User }) => {
+  const [current, setCurrent] = useState('mail');
+  
 
-const Header = (props: { user: User }) => {
-    const [offers, setOffers] = useState<AdverOffer[]>([]);
-    const [mjson, setTest] = useState<DivJson>(defaultAdvHeader);
+  
 
-    useEffect(() => {
-        (
-            async () => {
-                // const { data } = await axios.get('productstop');
-                // setOffers(data.data);
+  let buttons;
 
-                const { data } = await axios.get('productstest');
-                setTest(data as DivJson);
-console.log(data)
-            }
-        )()
-    }, []);
+  if (!props.user?.id) {
+    buttons = (
+      <p>
+        {/* <Button view="normal">Normal</Button> */}
+        <Link to={'/login'} className="btn btn-primary my-2">Войти</Link>
+        <Link to={'/register'} className="btn btn-primary my-2">Регистрация</Link>
+      </p>
+    )
+  }
+  const onClick: MenuProps['onClick'] = (e) => {
+    console.log('click ', e);
+    setCurrent(e.key);
+  };
+  return (
+    <Header style={headerStyle}>
+      <Flex justify='space-between' gap='middle' align='center'>
+        <Flex justify='flex-start' gap='middle' align='center'>
+          {/* <Image src='http://192.168.1.119:3030/logo/mainlogo.jpg'/> */}
+          <h1>EVitrine</h1>
+          <Dropdown menu={menuProps}>
+            <Button>
+              <Space>
+                Каталог
+                <DownOutlined />
+              </Space>
+            </Button>
+          </Dropdown>
+          <Button type="default" href='/adversing'>Акции</Button>
+          <Button type="default" href='/contact'>Контакты</Button>
+        </Flex>
+        <Tooltip title="Искать на сайте">
+          <Search
+            placeholder="введите текст для поиска"
+            allowClear
+            enterButton="Найти"
+            size="large"
+          // onSearch={onSearch}
+          />
+        </Tooltip>
+        <Flex justify='flex-end' gap='middle' align='center'>
+          <Tooltip title="Личный кабинет">
+            <Badge count={3} color='DodgerBlue'>
+              <a href="/profile">
+                <Avatar style={{ backgroundColor: '#4169E1' }} shape="circle" icon={<UserOutlined />} />
+              </a>
+            </Badge>
+          </Tooltip>
+          <Tooltip title="Избранное">
+            <Badge count={0}>
+              <a href="/wishlist">
+                <Avatar style={{ backgroundColor: '#4169E1' }} shape="circle" icon={<HeartTwoTone />} />
+              </a>
+            </Badge>
+          </Tooltip>
+          <Tooltip title="Корзина">
+            <Badge count={88}>
+            <a href="/cart">
+              <Avatar style={{ backgroundColor: '#4169E1' }} shape="circle" icon={<ShoppingCartOutlined />} />
+            </a>
+            </Badge>
+          </Tooltip>
+        </Flex>
+      </Flex>
+    </Header>
 
-    let buttons;
-    
-    // let json ={
-    //     "templates": {
-    //         "text_block": {
-    //             "type": "text",
-    //             "font_size": 14,
-    //             "text_alignment_horizontal": "center",
-    //             "text_alignment_vertical": "center",
-    //             "alignment_horizontal": "center",
-    //             "paddings": {
-    //                 "top": 4,
-    //                 "bottom": 4,
-    //                 "left": 8,
-    //                 "right": 8
-    //             },
-    //             "width": {
-    //                 "type": "match_parent"
-    //             },
-    //             "height": {
-    //                 "type": "match_parent"
-    //             },
-    //             "background": [
-    //                 {
-    //                     "type": "solid",
-    //                     "color": "#f1f1f1"
-    //                 }
-    //             ],
-    //             "border": {
-    //                 "corner_radius": 16
-    //             }
-    //         }
-    //     },
-    //     "card": {
-    //         "log_id": "sample_card",
-    //         "states": [
-    //             {
-    //                 "state_id": 0,
-    //                 "div": {
-    //                     "type": "container",
-    //                     "orientation": "vertical",
-    //                     "margins": {
-    //                         "top": 5,
-    //                         "bottom": 5
-    //                     },
-    //                     "items": [
-    //                         {
-    //                             "type": "container",
-    //                             "items": [
-    //                                 {
-    //                                     "type": "pager",
-    //                                     "id": "pager_with_indicator",
-    //                                     "item_spacing": {
-    //                                         "type": "fixed",
-    //                                         "value": 8
-    //                                     },
-    //                                     "height": {
-    //                                         "type": "fixed",
-    //                                         "value": 300
-    //                                     },
-    //                                     "items": [
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "height": {
-    //                                               "type": "fixed",
-    //                                                "value": 300
-    //                                             },
-    //                                             "background": [
-    //                                               {
-    //                                                 "type": "image",
-    //                                                 "image_url": "http://192.168.1.119:3030/085c4b071cd8.jpg"
-    //                                               },
-    //                                               {
-    //                                                 "type": "gradient",
-    //                                                 "colors": [
-    //                                                   "#000",
-    //                                                   "#0fff"
-    //                                                 ],
-    //                                                 "angle": 270
-    //                                               }
-    //                                             ],
-    //                                             "text_alignment_vertical": "bottom",
-    //                                             "font_size":30,
-    //                                             "text_color":"#ffffff",
-    //                                             "text": "Gradient and image"
-    //                                           },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 1"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 2"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 3"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 4"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 5"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 6"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 7"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 8"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 9"
-    //                                         },
-    //                                         {
-    //                                             "type": "text_block",
-    //                                             "text": "Item 10"
-    //                                         }
-    //                                     ],
-    //                                     "layout_mode": {
-    //                                         "type": "fixed",
-    //                                         "neighbour_page_width": {
-    //                                             "type": "fixed",
-    //                                             "value": 16
-    //                                         }
-    //                                     },
-    //                                     "paddings": {
-    //                                         "right": 4,
-    //                                         "left": 4
-    //                                     }
-    //                                 },
-    //                                 {
-    //                                     "type": "indicator",
-    //                                     "active_item_color": "#000000",
-    //                                     "active_item_size": 1.5,
-    //                                     "height": {
-    //                                         "type": "fixed",
-    //                                         "value": 10
-    //                                     },
-    //                                     "margins": {
-    //                                         "top": 10,
-    //                                         "bottom": 10
-    //                                     },
-    //                                     "space_between_centers": 10,
-    //                                     "inactive_item_color": "#D0D1D9",
-    //                                     "pager_id": "pager_with_indicator",
-    //                                     "shape": {
-    //                                         "type": "rounded_rectangle",
-    //                                         "corner_radius": {
-    //                                             "type": "fixed",
-    //                                             "value": 2
-    //                                         },
-    //                                         "item_height": {
-    //                                             "type": "fixed",
-    //                                             "value": 2
-    //                                         },
-    //                                         "item_width": {
-    //                                             "type": "fixed",
-    //                                             "value": 10
-    //                                         }
-    //                                     }
-    //                                 }
-    //                             ]
-    //                         }
-    //                     ]
-    //                 }
-    //             }
-    //         ]
-    //     }
-    // };    
-
-    if (!props.user?.id) {
-        buttons = (
-            <p>
-                <Button view="normal" size="l">Normal</Button>
-                <Link to={'/login'} className="btn btn-primary my-2">Войти</Link>
-                <Link to={'/register'} className="btn btn-primary my-2">Регистрация</Link>
-            </p>
-        )
-    }
-
-    return (
-        <section className="text-center container mx-auto">
-            <DivKit id="test" json={mjson}/>;
-            <ProductsTOP products={offers} />
-        </section>
-
-
-    );
+  );
 };
 
 export default connect(
-    (state: { user: User }) => ({
-        user: state.user
-    })
-)(Header);
+  (state: { user: User }) => ({
+    user: state.user
+  })
+)(HeaderM);

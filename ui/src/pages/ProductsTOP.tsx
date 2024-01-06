@@ -1,23 +1,29 @@
 import { AdverOffer } from "../models/adver";
-import Carousel from 'react-bootstrap/Carousel';
 import Image from 'react-bootstrap/Image';
+import { Carousel } from 'antd';
+
+const contentStyle: React.CSSProperties = {
+    height: '160px',
+    color: '#fff',
+    lineHeight: '160px',
+    textAlign: 'center',
+    background: '#364d79',
+  };
+
 
 const ProductsTOP = (props :{
         products: AdverOffer[]}) => {
     return (
-        <Carousel data-bs-theme="dark">
+        <Carousel autoplay>
             {props.products.map(product => {
                 return (
-                <Carousel.Item>
-                    <Image
-                        className="d-block w-100"
-                        src={product.bannerimage}
-                        
-                        fluid />
-                    <Carousel.Caption>
-                        <p>{product.description}</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
+                <div>
+                    <p style={contentStyle}>{product.description}</p>
+                    {/* <Image h-160
+                        className="d-block"
+                        src={product.bannerimage}                        
+                        fluid /> */}
+                </div>
                 )
             })}
         </Carousel>

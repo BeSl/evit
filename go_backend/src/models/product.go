@@ -1,5 +1,7 @@
 package models
 
+import "github.com/google/uuid"
+
 type Product struct {
 	Model
 	Title       string  `json:"title"`
@@ -38,4 +40,18 @@ type CollectionProduct struct {
 	BagesUrl         string
 	Product          []Product          `json:"products" gorm:"many2many:collection_products"`
 	ParentCollection *CollectionProduct `json:"parrent_collection" gorm:"foreignKey:CollectionId"`
+}
+
+type CategoryProduct struct {
+	Model
+	ExtId  uuid.UUID `json:"uid"`
+	Name   string    `json:"name"`
+	Link   string    `json:"refer"`
+	Active bool      `json:"-"`
+
+	ParrentCategory   *CategoryProduct `json:"parrent_category" gorm:"-"`
+	ParrentExtID      uuid.UUID        `json:"parrent_uid"`
+	ParrentCategoryID uint
+
+	Products []Product `json:"products" gorm:"many2many:collection_products"`
 }

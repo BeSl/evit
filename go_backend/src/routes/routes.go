@@ -13,12 +13,23 @@ func Setup(app *fiber.App) {
 	setAmbassadorRoute(api)
 	setCheckoutRoute(api)
 	setADVRouter(api)
+	setCategory(api)
 }
 
 func setADVRouter(api fiber.Router) {
 	adv := api.Group("adv")
 	adv.Post("/offers", controllers.CreateAdvOffer)
 	adv.Get("/offers", controllers.ActiveAdvers)
+
+}
+
+func setCategory(api fiber.Router) {
+	cat := api.Group("category")
+	cat.Get("all", controllers.Categories)
+	cat.Get("products", controllers.ProductFromCategory)
+
+	catauth := cat.Use(middlewares.IsAuthenticated)
+	catauth.Post("new", controllers.NewCategory)
 
 }
 
@@ -51,7 +62,7 @@ func setAmbassadorRoute(api fiber.Router) {
 	ambassador.Get("products/backend", controllers.ProductsBackend)
 	ambassador.Get("products/:id", controllers.GetProduct)
 
-	ambassador.Get("productstop", controllers.ActiveAdvers)
+	ambassador.Get("banners", controllers.ActiveAdvers)
 	ambassador.Get("productstest", controllers.TestAdvOffer)
 
 	ambassadorAuthenticated := ambassador.Use(middlewares.IsAuthenticated)

@@ -1,15 +1,19 @@
 import React, { Dispatch, useEffect, useState } from 'react';
-import NavMenu from "./NavMenu";
-import Header from "./Header";
-import axios from "axios";
+import HeaderM from "./Header";
+import axios from 'axios';
 import { Redirect, useLocation } from "react-router-dom";
 import { User } from "../models/user";
 import { setUser } from "../redux/actions/setUserAction";
 import { connect } from "react-redux";
+import { Breadcrumb, Button, Layout, Menu, theme } from 'antd';
 
-const Layout = (props: any) => {
+const {Footer} = Layout;
+
+const LayoutM = (props: any) => {
     const location = useLocation();
-
+    const {
+        token: { colorBgContainer, borderRadiusLG },
+      } = theme.useToken();
     useEffect(() => {
         (
             async () => {
@@ -19,34 +23,25 @@ const Layout = (props: any) => {
                     props.setUser(data);
 
                 } catch (e) {
-                    // console.log(e);
                 }
             }
         )();
     }, []);
 
-    let header;
+    const header = <HeaderM />;
 
-    // if (location.pathname === '/' || location.pathname === '/backend') {
-        header = <Header />;
-    // }
 
     return (
-        <div>
-            
-            <NavMenu />
-
-            <main>
-            {header}                
-                    <div className="album py-5 bg-light">
-                        <div className="container">
-
-                            {props.children}
-
-                        </div>
-                    </div>
-            </main>
-        </div>
+        <Layout >
+          {header}
+        <Layout>
+          <Layout style={{ padding: '0 2px 2px' }}>
+              {props.children}
+          </Layout>
+        </Layout>
+        <Footer >
+          <h2>Это Footer. Нужно потом что-то разместить</h2></Footer>
+      </Layout>        
     );
 };
 
@@ -58,4 +53,4 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
     setUser: (user: User) => dispatch(setUser(user))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutM);
