@@ -3,69 +3,16 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { User } from "../models/user";
 import axios from 'axios';
-import { AppstoreOutlined, ContactsOutlined, SendOutlined, UserOutlined, DatabaseTwoTone, HeartTwoTone, ShoppingCartOutlined } from '@ant-design/icons';
+import {UserOutlined, HeartTwoTone, ShoppingCartOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Badge, Layout, Menu, Image, Tooltip, Button, Input, Flex, Avatar, message } from 'antd';
-import { AdverOffer } from '../models/adver';
+import { Badge, Layout, Tooltip, Button, Input, Flex, Avatar, message } from 'antd';
 
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 
-
 const { Search } = Input;
 const { Header } = Layout;
 
-// const items: MenuProps['items'] = [
-//   {
-//     key: '1',
-//     type: 'group',
-//     // disabled: false,
-//     label: 'Золотая коллекция',
-//     children: [
-//       {
-//         key: '1-1',
-//         label: 'Браслеты',
-//       },
-//       {
-//         key: '1-2',
-//         label: 'Кольца',
-//       },
-//     ],
-//   },
-//   {
-//     key: '2',
-//     label: 'Одежда',
-//     children: [
-//       {
-//         key: '2-1',
-//         label: 'Куртки',
-//       },
-//       {
-//         key: '2-2',
-//         label: 'Брюки',
-//       },
-//     ],
-//   },
-//   {
-//     key: '3',
-//     label: 'Косметика',
-//     // disabled: true,
-//     children: [
-//       {
-//         key: '3-1',
-//         label: 'Крем',
-//       },
-//       {
-//         key: '3-2',
-//         label: 'Мыло',
-//       },
-//       {
-//         key: '3-2',
-//         label: 'Порошок',
-//       },
-//     ],
-//   },
-// ];
 
 
 const headerStyle: React.CSSProperties = {
@@ -121,6 +68,7 @@ const menuProps = {
     console.log('click ', e);
     setCurrent(e.key);
   };
+
   return (
     <Header style={headerStyle}>
       <Flex justify='space-between' gap='middle' align='center'>

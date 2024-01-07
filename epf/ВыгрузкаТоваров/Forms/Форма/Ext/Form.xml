@@ -301,6 +301,147 @@
 						</Table>
 					</ChildItems>
 				</Page>
+				<Page name="ГруппаКонтактнаяИнформация" id="107">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа контактная информация</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа контактная информация</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="ГруппаКонтактнаяИнформацияРасширеннаяПодсказка" id="108"/>
+					<ChildItems>
+						<InputField name="ОрганизацияСайта" id="109">
+							<DataPath>ОрганизацияСайта</DataPath>
+							<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+							<ContextMenu name="ОрганизацияСайтаКонтекстноеМеню" id="110"/>
+							<ExtendedTooltip name="ОрганизацияСайтаРасширеннаяПодсказка" id="111"/>
+							<Events>
+								<Event name="OnChange">ОрганизацияСайтаПриИзменении</Event>
+							</Events>
+						</InputField>
+						<UsualGroup name="группаДанныеОтправки" id="142">
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Данные отправки</v8:content>
+								</v8:item>
+							</Title>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Группа данные отправки</v8:content>
+								</v8:item>
+							</ToolTip>
+							<Group>Vertical</Group>
+							<Behavior>Usual</Behavior>
+							<ExtendedTooltip name="группаДанныеОтправкиРасширеннаяПодсказка" id="143"/>
+							<ChildItems>
+								<InputField name="ки_Титул" id="139">
+									<DataPath>ки_Титул</DataPath>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Заголовок</v8:content>
+										</v8:item>
+									</Title>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ки_ТитулКонтекстноеМеню" id="140"/>
+									<ExtendedTooltip name="ки_ТитулРасширеннаяПодсказка" id="141"/>
+								</InputField>
+								<InputField name="ки_ПодробноеОписание" id="136">
+									<DataPath>ки_ПодробноеОписание</DataPath>
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Подробное описание</v8:content>
+										</v8:item>
+									</Title>
+									<MultiLine>true</MultiLine>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ContextMenu name="ки_ПодробноеОписаниеКонтекстноеМеню" id="137"/>
+									<ExtendedTooltip name="ки_ПодробноеОписаниеРасширеннаяПодсказка" id="138"/>
+								</InputField>
+								<Table name="КонтактыДляСайта" id="112">
+									<Representation>List</Representation>
+									<AutoInsertNewRow>true</AutoInsertNewRow>
+									<EnableStartDrag>true</EnableStartDrag>
+									<EnableDrag>true</EnableDrag>
+									<DataPath>КонтактыДляСайта</DataPath>
+									<RowFilter xsi:nil="true"/>
+									<ContextMenu name="КонтактыДляСайтаКонтекстноеМеню" id="113"/>
+									<AutoCommandBar name="КонтактыДляСайтаКоманднаяПанель" id="114">
+										<ChildItems>
+											<Button name="КонтактыДляСайтаЗаписатьКонтакт" id="134">
+												<Type>CommandBarButton</Type>
+												<CommandName>Form.Command.ЗаписатьКонтакт</CommandName>
+												<ExtendedTooltip name="КонтактыДляСайтаЗаписатьКонтактРасширеннаяПодсказка" id="135"/>
+											</Button>
+										</ChildItems>
+									</AutoCommandBar>
+									<ExtendedTooltip name="КонтактыДляСайтаРасширеннаяПодсказка" id="115"/>
+									<SearchStringAddition name="КонтактыДляСайтаСтрокаПоиска" id="116">
+										<AdditionSource>
+											<Item>КонтактыДляСайта</Item>
+											<Type>SearchStringRepresentation</Type>
+										</AdditionSource>
+										<ContextMenu name="КонтактыДляСайтаСтрокаПоискаКонтекстноеМеню" id="117"/>
+										<ExtendedTooltip name="КонтактыДляСайтаСтрокаПоискаРасширеннаяПодсказка" id="118"/>
+									</SearchStringAddition>
+									<ViewStatusAddition name="КонтактыДляСайтаСостояниеПросмотра" id="119">
+										<AdditionSource>
+											<Item>КонтактыДляСайта</Item>
+											<Type>ViewStatusRepresentation</Type>
+										</AdditionSource>
+										<ContextMenu name="КонтактыДляСайтаСостояниеПросмотраКонтекстноеМеню" id="120"/>
+										<ExtendedTooltip name="КонтактыДляСайтаСостояниеПросмотраРасширеннаяПодсказка" id="121"/>
+									</ViewStatusAddition>
+									<SearchControlAddition name="КонтактыДляСайтаУправлениеПоиском" id="122">
+										<AdditionSource>
+											<Item>КонтактыДляСайта</Item>
+											<Type>SearchControl</Type>
+										</AdditionSource>
+										<ContextMenu name="КонтактыДляСайтаУправлениеПоискомКонтекстноеМеню" id="123"/>
+										<ExtendedTooltip name="КонтактыДляСайтаУправлениеПоискомРасширеннаяПодсказка" id="124"/>
+									</SearchControlAddition>
+									<ChildItems>
+										<InputField name="КонтактыДляСайтаНазвание" id="125">
+											<DataPath>КонтактыДляСайта.Название</DataPath>
+											<EditMode>EnterOnInput</EditMode>
+											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+											<ContextMenu name="КонтактыДляСайтаНазваниеКонтекстноеМеню" id="126"/>
+											<ExtendedTooltip name="КонтактыДляСайтаНазваниеРасширеннаяПодсказка" id="127"/>
+										</InputField>
+										<InputField name="КонтактыДляСайтаЗначение" id="128">
+											<DataPath>КонтактыДляСайта.Значение</DataPath>
+											<EditMode>EnterOnInput</EditMode>
+											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+											<ContextMenu name="КонтактыДляСайтаЗначениеКонтекстноеМеню" id="129"/>
+											<ExtendedTooltip name="КонтактыДляСайтаЗначениеРасширеннаяПодсказка" id="130"/>
+										</InputField>
+									</ChildItems>
+								</Table>
+							</ChildItems>
+						</UsualGroup>
+						<InputField name="ПроизвольнаяКИ" id="146">
+							<DataPath>ПроизвольнаяКИ</DataPath>
+							<MultiLine>true</MultiLine>
+							<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+							<ContextMenu name="ПроизвольнаяКИКонтекстноеМеню" id="147"/>
+							<ExtendedTooltip name="ПроизвольнаяКИРасширеннаяПодсказка" id="148"/>
+						</InputField>
+						<Button name="ОтправитьПроизвольнуюКИ" id="144">
+							<Type>UsualButton</Type>
+							<CommandName>Form.Command.ОтправитьПроизвольнуюКИ</CommandName>
+							<ExtendedTooltip name="ОтправитьПроизвольнуюКИРасширеннаяПодсказка" id="145"/>
+						</Button>
+					</ChildItems>
+				</Page>
 			</ChildItems>
 		</Pages>
 	</ChildItems>
@@ -618,6 +759,114 @@
 				</Column>
 			</Columns>
 		</Attribute>
+		<Attribute name="ОрганизацияСайта" id="8">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Организация сайта</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>cfg:CatalogRef.Организации</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="ки_Титул" id="9">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ки титул</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="ки_ПодробноеОписание" id="10">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ки подробное описание</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Реквизит1" id="11">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="КонтактыДляСайта" id="12">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Контакты для сайта</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="Название" id="1">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Название</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Значение" id="2">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Значение</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="ПроизвольнаяКИ" id="13">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Произвольная КИ</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
 	</Attributes>
 	<Commands>
 		<Command name="Авторизация" id="1">
@@ -709,6 +958,36 @@
 				</v8:item>
 			</ToolTip>
 			<Action>ВыгрузитьНаСайт</Action>
+		</Command>
+		<Command name="ЗаписатьКонтакт" id="7">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Записать контакт</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Записать контакт</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ЗаписатьКонтакт</Action>
+		</Command>
+		<Command name="ОтправитьПроизвольнуюКИ" id="8">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Отправить произвольную КИ</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Отправить произвольную КИ</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ОтправитьПроизвольнуюКИ</Action>
 		</Command>
 	</Commands>
 </Form>

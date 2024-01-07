@@ -15,3 +15,6 @@ type AdversCategory struct {
 	Image    string
 	Products []Product `json:"products" gorm:"many2many:adv_products"`
 }
+
+type Actions struct {
+}

@@ -1,0 +1,70 @@
+﻿{
+    "templates": {
+        "text_block": {
+            "type": "text",
+            "font_size": 14,
+            "text_alignment_horizontal": "center",
+            "text_alignment_vertical": "center",
+            "alignment_horizontal": "center",
+            "paddings": {
+                "top": 4,
+                "bottom": 4,
+                "left": 8,
+                "right": 8
+            },
+            "width": {
+                "type": "match_parent"
+            },
+            "height": {
+                "type": "match_parent"
+            },
+            "background": [
+                {
+                    "type": "solid",
+                    "color": "#f1f1f1"
+                }
+            ],
+            "border": {
+                "corner_radius": 16
+            }
+        },
+        "title": {
+            "type": "text",
+            "font_size": 20,
+            "line_height": 24,
+            "font_weight": "bold",
+            "paddings": {
+                "left": 24,
+                "right": 24,
+                "bottom": 16
+            }
+        },
+        "subtitle": {
+            "font_size": 15,
+            "line_height": 20,
+            "type": "text",
+            "paddings": {
+                "left": 24,
+                "right": 24
+            }
+        }
+    },
+    "card": {
+        "log_id": "sample_card",
+        "states": [
+            {
+                "state_id": 0,
+                "div": {
+                    "type": "container",
+                    "orientation": "vertical",
+                    "margins": {
+                        "top": 24,
+                        "bottom": 24
+                    },
+                    "items": [
+                        ]
+                }
+            }
+        ]
+    }
+}

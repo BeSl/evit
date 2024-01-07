@@ -1,18 +1,58 @@
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import React from 'react';
-import { Avatar, List, Space, Card, Button } from 'antd';
+import React , { useEffect, useState } from 'react';
 import LayoutM from '../components/Layout';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Table} from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import { Label } from '@mui/icons-material';
+import { DivKit } from '@divkitframework/react';
+import '@divkitframework/divkit/dist/client.css';
+import axios from 'axios';
 
+
+const tempjson = {
+    "templates": {
+        "title": {
+            "type": "text",
+            "font_size": 20,
+            "line_height": 24,
+            "font_weight": "bold",
+            "paddings": {
+                "left": 24,
+                "right": 24,
+                "bottom": 16
+            }
+        }
+    },
+    "card": {
+        "log_id": "sample_card",
+        "states": [
+            {
+                "state_id": 0,
+                "div": {
+                    "type": "container",
+                    "orientation": "vertical",
+                    "items": [
+                        {
+                            "type": "title",
+                            "text": "информация о контактах скоро появится"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
 
 const ContactInfo = () => {
+    const [json, setPages] = useState(tempjson);
+    useEffect(() => {
+        (
+          async () => {
+            const { data } = await axios.get('contacts');
+            setPages(data);
+          }
+        )()
+      }, []);
 
     return (
         <LayoutM>
-            <h1>О проекте</h1>
+            <DivKit id="smth" json={json} />
         </LayoutM>
     );
 };

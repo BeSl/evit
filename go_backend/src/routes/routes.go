@@ -7,6 +7,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+//pub
+//adm
+//usr
+
 func Setup(app *fiber.App) {
 	api := app.Group("api")
 	setAdminRoute(api)
@@ -52,6 +56,8 @@ func setAdminRoute(api fiber.Router) {
 	adminAuthenticated.Delete("products/:id", controllers.DeleteProduct)
 	adminAuthenticated.Get("users/:id/links", controllers.Link)
 	adminAuthenticated.Get("orders", controllers.Orders)
+
+	adminAuthenticated.Post("newcontacts", controllers.UpdateContact)
 }
 
 func setAmbassadorRoute(api fiber.Router) {
@@ -65,6 +71,7 @@ func setAmbassadorRoute(api fiber.Router) {
 	ambassador.Get("productscat/:id", controllers.GetProduct)
 	ambassador.Get("banners", controllers.ActiveAdvers)
 	ambassador.Get("productstest", controllers.TestAdvOffer)
+	ambassador.Get("contacts", controllers.Contacts)
 
 	ambassadorAuthenticated := ambassador.Use(middlewares.IsAuthenticated)
 	ambassadorAuthenticated.Get("user", controllers.User)

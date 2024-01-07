@@ -1,0 +1,16 @@
+﻿ {
+                            "type": "container",
+                            "items": [
+                                  {
+                                    "type": "empty_block",
+                                    "width": {
+                                        "type": "match_parent",
+                                        "weight": 4
+                                    }
+                                },
+                                {
+                                    "type": "text_block",
+                                    "text": "Серьезно: Разрабатывается для изучения нового"
+                                }
+                            ]
+                        }

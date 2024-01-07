@@ -33,5 +33,6 @@ func AutoMigrate() {
 		models.AdversCategory{},
 		models.CollectionProduct{},
 		models.CategoryProduct{},
+		models.ContactOrgInfo{},
 	)
 }
