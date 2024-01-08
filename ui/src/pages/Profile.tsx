@@ -44,10 +44,10 @@ const Profile = (props: any) => {
       }
       
     useEffect(() => {
-        setFirstName(props.user.first_name);
-        setLastName(props.user.last_name);
-        setEmail(props.user.email);
-    }, [props.user]);
+        setFirstName(props.user?.first_name);
+        setLastName(props.user?.last_name);
+        setEmail(props.user?.email);
+    }, [props?.user]);
 
     const infoSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();

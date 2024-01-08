@@ -4,10 +4,14 @@ import "github.com/google/uuid"
 
 type Product struct {
 	Model
-	Title       string  `json:"title"`
-	Description string  `json:"description"`
-	Image       string  `json:"image"`
-	Price       float64 `json:"price"`
+	Title         string  `json:"title"`
+	Description   string  `json:"description"`
+	Image         string  `json:"image"`
+	Price         float64 `json:"price"`
+	PriceAction   float64 `json:"price_action"`
+	WhishListUser bool    `json:"wishlist_user"`
+	HotSale       bool    `json:"hotsale"`
+	Ostatok       int     `json:"min_ost" gorm:"-"`
 }
 
 type ProductDetail struct {

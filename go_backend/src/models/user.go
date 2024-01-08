@@ -13,6 +13,9 @@ type User struct {
 	Password     []byte   `json:"-"`
 	IsAmbassador bool     `json:"-"`
 	Revenue      *float64 `json:"revenue,omitempty" gorm:"-"`
+	Phone        string   `json:"phone"`
+	Adress       string   `json:"adress"`
+	OtherInfo    string   `json:"other"`
 }
 
 func (user *User) SetPassword(password string) {

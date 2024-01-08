@@ -150,9 +150,31 @@ func UpdateInfo(c *fiber.Ctx) error {
 	}
 	user.Id = id
 
-	database.DB.Model(&user).Updates(&user)
+	database.DB.Model(&user).Updates(&user).Find(&user)
 
 	return c.JSON(user)
+}
+
+func UpdateContactInfo(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	id, _ := middlewares.GetUserId(c)
+
+	user := models.User{
+		Adress:    data["adress"],
+		Phone:     data["phone"],
+		OtherInfo: data["other"],
+	}
+	user.Id = id
+
+	database.DB.Model(&user).Updates(&user).Find(&user)
+
+	return c.JSON(user)
+
 }
 
 func UpdatePassword(c *fiber.Ctx) error {
@@ -160,13 +182,6 @@ func UpdatePassword(c *fiber.Ctx) error {
 
 	if err := c.BodyParser(&data); err != nil {
 		return err
-	}
-
-	if data["password"] != data["password_confirm"] {
-		c.Status(400)
-		return c.JSON(fiber.Map{
-			"message": "passwords do not match",
-		})
 	}
 
 	id, _ := middlewares.GetUserId(c)

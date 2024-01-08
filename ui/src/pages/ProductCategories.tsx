@@ -22,16 +22,6 @@ const ProductCategories = (props: any) => {
       page: 1
   });
 
-    useEffect(() => {
-        (
-          async () => {
-            const { data } = await axios.get('banners');
-            setOffers(data.data);
-          }
-        )()
-      }, []);
-      
-      
       useEffect(() => {
         (
             async () => {
@@ -52,11 +42,8 @@ const ProductCategories = (props: any) => {
                 padding: 0,
                 margin: 0,
                 minHeight: 280,
-                // background: colorBgContainer,
-                // borderRadius: borderRadiusLG,
               }}
             >
-            {/* <ProductsTOP products={offers} /> */}
             <Products products={products} filters={filters} setFilters={setFilters} lastPage={lastPage}/> 
             </Content>
             </LayoutM>

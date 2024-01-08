@@ -5,14 +5,21 @@ import { Redirect } from "react-router-dom";
 import { Button, Flex, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import LayoutM from '../components/Layout';
-
+import { message } from 'antd';
 
 const Login = () => {
   const [redirect, setRedirect] = useState(false);
   const [form] = Form.useForm<{ username: string; email: string }>();
+  const [messageApi, contextHolder] = message.useMessage();
 
+  const error = (text: string) => {
+    messageApi.open({
+        type: 'error',
+        content: text,
+    });
+};
   const onFinish = async (values: any) => {
-    console.log('Success:', values);
+    try{
     let email =  values.username;
     let password = values.password;
        await axios.post('login', {
@@ -20,6 +27,9 @@ const Login = () => {
         password
      });
      setRedirect(true);
+    } catch (e: any) {
+      error("Ошибка авторизации. Попробуйте позже");
+  }
   };
 
   if (redirect) {
@@ -68,9 +78,12 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item>
+            <>
+            {contextHolder}
             <Button type="primary" htmlType="submit" className="login-form-button">
               Войти
             </Button>
+            </>
             Или <a href="/register">Зарегистрироваться!</a>
           </Form.Item>
         </Form>

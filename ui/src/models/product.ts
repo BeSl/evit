@@ -3,5 +3,9 @@ export interface Product {
     title: string;
     description: string;
     image: string;
-    price: number
+    price: number,
+    price_action: number;
+    wishlist_user: boolean;
+    hotsale: boolean;
+    min_ost: boolean; 
 }

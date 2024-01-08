@@ -74,7 +74,9 @@ const menuProps = {
       <Flex justify='space-between' gap='middle' align='center'>
         <Flex justify='flex-start' gap='middle' align='center'>
           {/* <Image src='http://192.168.1.119:3030/logo/mainlogo.jpg'/> */}
-          <h1>EVitrine</h1>
+          
+          <a href='/'><h1>EVitrine</h1>
+          </a>
           <Dropdown menu={menuProps}>
             <Button>
               <Space>

@@ -2,13 +2,25 @@ import React, { useState } from 'react';
 import { Product } from "../models/product";
 import { Filters } from "../models/filters";
 import axios from "axios";
-import { Button, Breadcrumb, Card, Image, Pagination } from 'antd';
+import { Button, Breadcrumb, Badge, Flex, Card, Pagination, Typography } from 'antd';
+import { AppstoreOutlined, HeartOutlined, SendOutlined, UserOutlined, DatabaseTwoTone, HeartTwoTone, ShoppingCartOutlined } from '@ant-design/icons';
+import Icon from '@ant-design/icons';
 import type { PaginationProps } from 'antd';
+import { Form, message } from 'antd';
 
+const cardStyle: React.CSSProperties = {
+    width: 600,
+};
+
+const imgStyle: React.CSSProperties = {
+    display: 'block',
+    width: 273,
+};
 const { Meta } = Card;
 const gridStyle: React.CSSProperties = {
     width: '20%',
-    height: '20%',
+    height: '15%',
+
     textAlign: 'center',
     padding: '24px',
     margin: '24px'
@@ -28,7 +40,14 @@ const Products = (props: {
         message: ''
     });
 
+    const [messageApi, contextHolder] = message.useMessage();
 
+    const success = (text: string) => {
+        messageApi.open({
+            type: 'success',
+            content: text,
+        });
+    };
     const onChange: PaginationProps['onChange'] = (page) => {
         console.log(page);
         load();
@@ -89,6 +108,13 @@ const Products = (props: {
         )
     }
 
+    const addCart = () => {
+        success("Добавлено в заказ");
+    }
+    
+    const addWishList = (name: string) =>{
+success("Добавлено в избранное "+name);
+    }
     return (
         <>
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -98,14 +124,41 @@ const Products = (props: {
             <Card title="Наши товары">
                 {props.products.map(product => {
                     return (
-                        <Card.Grid style={gridStyle}
+                        <Card.Grid 
                             hoverable >
-                            <Image
-                                src={product.image}
-                            />
-                            <Meta title={product.title} description={product.description} />
-                            <Button>Купить ${product.price}</Button>
+                            <Flex justify="space-between">
+                                <Badge.Ribbon text="Осталось мало" color="red">
+                                    <img
+                                        alt="avatar"
+                                        src={product.image}
+                                        style={imgStyle}
+                                    />
+                                </Badge.Ribbon>
+                                <Flex vertical align="flex-end" justify="space-between" style={{ padding: 12 }}>
+                                <Flex align="flex-end" justify="space-between" style={{ padding: 0 }}>
+                                <>
+                                {contextHolder}
+                                <HeartOutlined onClick={()=>addWishList(product.title)} style={{ color: '#f5222d', fontSize:20 }} />
+                                </>
+                                </Flex>
+                                    <Typography.Title level={3}>
+                                        {product.title}
+                                    </Typography.Title>
+                                    <Typography.Title level={5}>
+                                        {product.description}
+                                    </Typography.Title>
+                                    <Typography.Text delete>$9999</Typography.Text>
+                                    <Typography.Text type="success">${product.price}</Typography.Text>
+                                    <>
+                                {contextHolder}
+                                    <Button onClick={addCart}   target="_blank">
+                                        В заказ 
+                                    </Button>
+                                    </>
+                                </Flex>
+                            </Flex>
                         </Card.Grid>
+
                     )
                 })}
             </Card>
