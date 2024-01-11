@@ -95,16 +95,49 @@ func NewCategory(c *fiber.Ctx) error {
 }
 
 func ProductFromCategory(c *fiber.Ctx) error {
-	id, err := strconv.Atoi(c.Params("id"))
+	idCategory, err := strconv.Atoi(c.Params("id"))
 	if err != nil {
 		return err
 	}
 
+	category := models.CategoryProduct{}
+	category.Id = uint(idCategory)
+
+	database.DB.Model(&category).Find(&category)
+
+	return c.JSON(fiber.Map{
+		"data": category.Products,
+	})
+}
+
+type ExtID struct {
+	Id string
+}
+
+func FillCategoryProduct(c *fiber.Ctx) error {
+	extiDCategory := c.Params("id")
+
+	var listId []ExtID
+
+	if err := c.BodyParser(&listId); err != nil {
+		return err
+	}
+	//prodExtId := c.Params("id"))
+
 	var category models.CategoryProduct
 
-	category.Id = uint(id)
+	database.DB.Where("ext_id=?", extiDCategory).Find(&category)
 
-	database.DB.Find(&category)
+	for _, v := range listId {
+		var tprod models.Product
+		database.DB.Where("ext_id=?", v.Id).Find(&tprod)
 
-	return c.JSON(category.Products)
+		category.Products = append(category.Products, tprod)
+
+	}
+	if category.Id == 0 {
+		return fiber.NewError(430, "Нет запрошенной категории")
+	}
+
+	return c.JSON(nil)
 }

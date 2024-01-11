@@ -18,7 +18,7 @@
 					<v8:content>Группа настройки</v8:content>
 				</v8:item>
 			</ToolTip>
-			<Behavior>Usual</Behavior>
+			<Behavior>Collapsible</Behavior>
 			<ExtendedTooltip name="ГруппаНастройкиРасширеннаяПодсказка" id="2"/>
 			<ChildItems>
 				<InputField name="Сервер" id="3">
@@ -87,6 +87,11 @@
 												<CommandName>Form.Command.СписокНоменклатуры</CommandName>
 												<ExtendedTooltip name="СписокНоменклатурыРасширеннаяПодсказка" id="17"/>
 											</Button>
+											<Button name="ТоварыТоварыСопоставитьСВнешним" id="156">
+												<Type>CommandBarButton</Type>
+												<CommandName>Form.Command.ТоварыСопоставитьСВнешним</CommandName>
+												<ExtendedTooltip name="ТоварыТоварыСопоставитьСВнешнимРасширеннаяПодсказка" id="157"/>
+											</Button>
 											<Button name="ВыгрузитьТовары" id="12">
 												<Type>CommandBarButton</Type>
 												<CommandName>Form.Command.ВыгрузитьТовары</CommandName>
@@ -127,6 +132,25 @@
 											<ContextMenu name="ТоварыВыгружатьКонтекстноеМеню" id="50"/>
 											<ExtendedTooltip name="ТоварыВыгружатьРасширеннаяПодсказка" id="51"/>
 										</CheckBoxField>
+										<ColumnGroup name="ТоварыГруппа5" id="178">
+											<ExtendedTooltip name="ТоварыГруппа5РасширеннаяПодсказка" id="179"/>
+											<ChildItems>
+												<InputField name="ТоварыИдСистемы_Сайт" id="180">
+													<DataPath>Товары.ИдСистемы_Сайт</DataPath>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="ТоварыИдСистемы_СайтКонтекстноеМеню" id="181"/>
+													<ExtendedTooltip name="ТоварыИдСистемы_СайтРасширеннаяПодсказка" id="182"/>
+												</InputField>
+												<InputField name="ТоварыВнешнийИД_Сайт" id="183">
+													<DataPath>Товары.ВнешнийИД_Сайт</DataPath>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="ТоварыВнешнийИД_СайтКонтекстноеМеню" id="184"/>
+													<ExtendedTooltip name="ТоварыВнешнийИД_СайтРасширеннаяПодсказка" id="185"/>
+												</InputField>
+											</ChildItems>
+										</ColumnGroup>
 										<InputField name="Реквизит1Номенклатура" id="34">
 											<DataPath>Товары.Номенклатура</DataPath>
 											<EditMode>EnterOnInput</EditMode>
@@ -134,34 +158,107 @@
 											<ContextMenu name="Реквизит1НоменклатураКонтекстноеМеню" id="35"/>
 											<ExtendedTooltip name="Реквизит1НоменклатураРасширеннаяПодсказка" id="36"/>
 										</InputField>
-										<InputField name="Реквизит1Артикул" id="37">
-											<DataPath>Товары.Артикул</DataPath>
-											<EditMode>EnterOnInput</EditMode>
-											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
-											<ContextMenu name="Реквизит1АртикулКонтекстноеМеню" id="38"/>
-											<ExtendedTooltip name="Реквизит1АртикулРасширеннаяПодсказка" id="39"/>
-										</InputField>
-										<InputField name="Реквизит1Описание" id="40">
-											<DataPath>Товары.Описание</DataPath>
-											<EditMode>EnterOnInput</EditMode>
-											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
-											<ContextMenu name="Реквизит1ОписаниеКонтекстноеМеню" id="41"/>
-											<ExtendedTooltip name="Реквизит1ОписаниеРасширеннаяПодсказка" id="42"/>
-										</InputField>
-										<InputField name="Реквизит1КартинкаURL" id="43">
-											<DataPath>Товары.КартинкаURL</DataPath>
-											<EditMode>EnterOnInput</EditMode>
-											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
-											<ContextMenu name="Реквизит1КартинкаURLКонтекстноеМеню" id="44"/>
-											<ExtendedTooltip name="Реквизит1КартинкаURLРасширеннаяПодсказка" id="45"/>
-										</InputField>
-										<InputField name="Реквизит1Цена" id="46">
-											<DataPath>Товары.Цена</DataPath>
-											<EditMode>EnterOnInput</EditMode>
-											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
-											<ContextMenu name="Реквизит1ЦенаКонтекстноеМеню" id="47"/>
-											<ExtendedTooltip name="Реквизит1ЦенаРасширеннаяПодсказка" id="48"/>
-										</InputField>
+										<ColumnGroup name="ТоварыГруппа1" id="167">
+											<ExtendedTooltip name="ТоварыГруппа1РасширеннаяПодсказка" id="168"/>
+											<ChildItems>
+												<InputField name="ТоварыАртикулСайт" id="158">
+													<DataPath>Товары.Артикул_Сайт</DataPath>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="ТоварыАртикулСайтКонтекстноеМеню" id="159"/>
+													<ExtendedTooltip name="ТоварыАртикулСайтРасширеннаяПодсказка" id="160"/>
+												</InputField>
+												<InputField name="Реквизит1Артикул" id="37">
+													<DataPath>Товары.Артикул</DataPath>
+													<Title>
+														<v8:item>
+															<v8:lang>ru</v8:lang>
+															<v8:content>АртСайт</v8:content>
+														</v8:item>
+													</Title>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="Реквизит1АртикулКонтекстноеМеню" id="38"/>
+													<ExtendedTooltip name="Реквизит1АртикулРасширеннаяПодсказка" id="39"/>
+												</InputField>
+											</ChildItems>
+										</ColumnGroup>
+										<ColumnGroup name="ТоварыГруппа2" id="169">
+											<ExtendedTooltip name="ТоварыГруппа2РасширеннаяПодсказка" id="170"/>
+											<ChildItems>
+												<InputField name="Реквизит1КартинкаURL" id="43">
+													<DataPath>Товары.КартинкаURL</DataPath>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="Реквизит1КартинкаURLКонтекстноеМеню" id="44"/>
+													<ExtendedTooltip name="Реквизит1КартинкаURLРасширеннаяПодсказка" id="45"/>
+												</InputField>
+												<InputField name="ТоварыКартинкаURLСайт" id="161">
+													<DataPath>Товары.КартинкаURL_Сайт</DataPath>
+													<Title>
+														<v8:item>
+															<v8:lang>ru</v8:lang>
+															<v8:content>УРЛ Сайт</v8:content>
+														</v8:item>
+													</Title>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="ТоварыКартинкаURLСайтКонтекстноеМеню" id="162"/>
+													<ExtendedTooltip name="ТоварыКартинкаURLСайтРасширеннаяПодсказка" id="163"/>
+												</InputField>
+											</ChildItems>
+										</ColumnGroup>
+										<ColumnGroup name="ТоварыГруппа3" id="171">
+											<ExtendedTooltip name="ТоварыГруппа3РасширеннаяПодсказка" id="172"/>
+											<ChildItems>
+												<InputField name="Реквизит1Цена" id="46">
+													<DataPath>Товары.Цена</DataPath>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="Реквизит1ЦенаКонтекстноеМеню" id="47"/>
+													<ExtendedTooltip name="Реквизит1ЦенаРасширеннаяПодсказка" id="48"/>
+												</InputField>
+												<ColumnGroup name="ТоварыГруппа6" id="189">
+													<Group>Horizontal</Group>
+													<ExtendedTooltip name="ТоварыГруппа6РасширеннаяПодсказка" id="190"/>
+													<ChildItems>
+														<InputField name="ТоварыЦенаСайт" id="164">
+															<DataPath>Товары.Цена_Сайт</DataPath>
+															<EditMode>EnterOnInput</EditMode>
+															<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+															<ContextMenu name="ТоварыЦенаСайтКонтекстноеМеню" id="165"/>
+															<ExtendedTooltip name="ТоварыЦенаСайтРасширеннаяПодсказка" id="166"/>
+														</InputField>
+														<InputField name="ТоварыЦенаАкция_Сайт" id="186">
+															<DataPath>Товары.ЦенаАкция_Сайт</DataPath>
+															<EditMode>EnterOnInput</EditMode>
+															<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+															<ContextMenu name="ТоварыЦенаАкция_СайтКонтекстноеМеню" id="187"/>
+															<ExtendedTooltip name="ТоварыЦенаАкция_СайтРасширеннаяПодсказка" id="188"/>
+														</InputField>
+													</ChildItems>
+												</ColumnGroup>
+											</ChildItems>
+										</ColumnGroup>
+										<ColumnGroup name="ТоварыГруппа4" id="173">
+											<ExtendedTooltip name="ТоварыГруппа4РасширеннаяПодсказка" id="174"/>
+											<ChildItems>
+												<InputField name="Реквизит1Описание" id="40">
+													<DataPath>Товары.Описание</DataPath>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="Реквизит1ОписаниеКонтекстноеМеню" id="41"/>
+													<ExtendedTooltip name="Реквизит1ОписаниеРасширеннаяПодсказка" id="42"/>
+												</InputField>
+												<InputField name="ТоварыОписаниеСайт" id="175">
+													<DataPath>Товары.Описание_Сайт</DataPath>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="ТоварыОписаниеСайтКонтекстноеМеню" id="176"/>
+													<ExtendedTooltip name="ТоварыОписаниеСайтРасширеннаяПодсказка" id="177"/>
+												</InputField>
+											</ChildItems>
+										</ColumnGroup>
 										<InputField name="ТоварыКодОтвета" id="52">
 											<DataPath>Товары.КодОтвета</DataPath>
 											<EditMode>EnterOnInput</EditMode>
@@ -664,6 +761,114 @@
 						</v8:StringQualifiers>
 					</Type>
 				</Column>
+				<Column name="Артикул_Сайт" id="9">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Артикул Сайт</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="КартинкаURL_Сайт" id="11">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Картинка URL Сайт</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Цена_Сайт" id="12">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Цена Сайт</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>10</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="Описание_Сайт" id="10">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Описание Сайт</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="ИдСистемы_Сайт" id="13">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ид системы сайт</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="ВнешнийИД_Сайт" id="14">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Внешний и д сайт</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>10</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="ЦенаАкция_Сайт" id="15">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Цена акция сайт</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>10</v8:Digits>
+							<v8:FractionDigits>0</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
 			</Columns>
 		</Attribute>
 		<Attribute name="СтруктураКаталога" id="7">
@@ -1049,6 +1254,21 @@
 				</v8:item>
 			</ToolTip>
 			<Action>ОтправитьПроизвольнуюКИ</Action>
+		</Command>
+		<Command name="ТоварыСопоставитьСВнешним" id="9">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Товары сопоставить с внешним</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Товары сопоставить с внешним</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>ТоварыСопоставитьСВнешним</Action>
 		</Command>
 	</Commands>
 </Form>

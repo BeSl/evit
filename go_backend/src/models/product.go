@@ -12,6 +12,12 @@ type Product struct {
 	WhishListUser bool    `json:"wishlist_user"`
 	HotSale       bool    `json:"hotsale"`
 	Ostatok       int     `json:"min_ost" gorm:"-"`
+	ExdID         uuid.UUID
+}
+
+type RemainsProduct struct {
+	Product Product
+	Count   int
 }
 
 type ProductDetail struct {
@@ -56,7 +62,7 @@ type CategoryProduct struct {
 	ParentCategory      *CategoryProduct `json:"child_category" gorm:"-"`
 	ParentCategoryExtID uuid.UUID        `json:"parent_uid"`
 
-	Products []Product `json:"products" gorm:"many2many:collection_products"`
+	Products []Product `json:"products" gorm:"many2many:collectionId_products"`
 }
 
 type DataCategorySite struct {

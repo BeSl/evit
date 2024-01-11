@@ -30,7 +30,7 @@ func setADVRouter(api fiber.Router) {
 func setCategory(api fiber.Router) {
 	cat := api.Group("category")
 	cat.Get("all", controllers.Categories)
-	cat.Get("products", controllers.ProductFromCategory)
+	cat.Get("products/:id", controllers.ProductFromCategory)
 
 	catauth := cat.Use(middlewares.IsAuthenticated)
 	catauth.Post("new", controllers.NewCategory)
@@ -68,7 +68,7 @@ func setAmbassadorRoute(api fiber.Router) {
 	ambassador.Get("products/backend", controllers.ProductsBackend)
 	ambassador.Get("products/:id", controllers.GetProduct)
 	ambassador.Get("categories", controllers.Categories)
-	ambassador.Get("productscat/:id", controllers.GetProduct)
+	ambassador.Get("productscat/:id", controllers.ProductFromCategory)
 	ambassador.Get("banners", controllers.ActiveAdvers)
 	ambassador.Get("productstest", controllers.TestAdvOffer)
 	ambassador.Get("contacts", controllers.Contacts)
