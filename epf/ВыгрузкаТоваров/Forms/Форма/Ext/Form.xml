@@ -87,11 +87,6 @@
 												<CommandName>Form.Command.СписокНоменклатуры</CommandName>
 												<ExtendedTooltip name="СписокНоменклатурыРасширеннаяПодсказка" id="17"/>
 											</Button>
-											<Button name="ТоварыТоварыСопоставитьСВнешним" id="156">
-												<Type>CommandBarButton</Type>
-												<CommandName>Form.Command.ТоварыСопоставитьСВнешним</CommandName>
-												<ExtendedTooltip name="ТоварыТоварыСопоставитьСВнешнимРасширеннаяПодсказка" id="157"/>
-											</Button>
 											<Button name="ВыгрузитьТовары" id="12">
 												<Type>CommandBarButton</Type>
 												<CommandName>Form.Command.ВыгрузитьТовары</CommandName>
@@ -136,11 +131,18 @@
 											<ExtendedTooltip name="ТоварыГруппа5РасширеннаяПодсказка" id="179"/>
 											<ChildItems>
 												<InputField name="ТоварыИдСистемы_Сайт" id="180">
-													<DataPath>Товары.ИдСистемы_Сайт</DataPath>
+													<DataPath>Товары.ИдСистемы</DataPath>
 													<EditMode>EnterOnInput</EditMode>
 													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
 													<ContextMenu name="ТоварыИдСистемы_СайтКонтекстноеМеню" id="181"/>
 													<ExtendedTooltip name="ТоварыИдСистемы_СайтРасширеннаяПодсказка" id="182"/>
+												</InputField>
+												<InputField name="ТоварыИдСистемы_Сайт1" id="191">
+													<DataPath>Товары.ИдСистемы_Сайт</DataPath>
+													<EditMode>EnterOnInput</EditMode>
+													<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+													<ContextMenu name="ТоварыИдСистемы_Сайт1КонтекстноеМеню" id="192"/>
+													<ExtendedTooltip name="ТоварыИдСистемы_Сайт1РасширеннаяПодсказка" id="193"/>
 												</InputField>
 												<InputField name="ТоварыВнешнийИД_Сайт" id="183">
 													<DataPath>Товары.ВнешнийИД_Сайт</DataPath>
@@ -822,11 +824,11 @@
 						</v8:StringQualifiers>
 					</Type>
 				</Column>
-				<Column name="ИдСистемы_Сайт" id="13">
+				<Column name="ИдСистемы" id="13">
 					<Title>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Ид системы сайт</v8:content>
+							<v8:content>Ид системы</v8:content>
 						</v8:item>
 					</Title>
 					<Type>
@@ -867,6 +869,21 @@
 							<v8:FractionDigits>0</v8:FractionDigits>
 							<v8:AllowedSign>Any</v8:AllowedSign>
 						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="ИдСистемы_Сайт" id="16">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ид системы сайт</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>0</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
 					</Type>
 				</Column>
 			</Columns>
@@ -1033,15 +1050,6 @@
 				</v8:StringQualifiers>
 			</Type>
 		</Attribute>
-		<Attribute name="Реквизит1" id="11">
-			<Type>
-				<v8:Type>xs:string</v8:Type>
-				<v8:StringQualifiers>
-					<v8:Length>0</v8:Length>
-					<v8:AllowedLength>Variable</v8:AllowedLength>
-				</v8:StringQualifiers>
-			</Type>
-		</Attribute>
 		<Attribute name="КонтактыДляСайта" id="12">
 			<Title>
 				<v8:item>
@@ -1107,15 +1115,6 @@
 					<v8:content>Лог работы</v8:content>
 				</v8:item>
 			</Title>
-			<Type>
-				<v8:Type>xs:string</v8:Type>
-				<v8:StringQualifiers>
-					<v8:Length>0</v8:Length>
-					<v8:AllowedLength>Variable</v8:AllowedLength>
-				</v8:StringQualifiers>
-			</Type>
-		</Attribute>
-		<Attribute name="Реквизит2" id="15">
 			<Type>
 				<v8:Type>xs:string</v8:Type>
 				<v8:StringQualifiers>

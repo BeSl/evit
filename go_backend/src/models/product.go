@@ -12,7 +12,7 @@ type Product struct {
 	WhishListUser bool    `json:"wishlist_user"`
 	HotSale       bool    `json:"hotsale"`
 	Ostatok       int     `json:"min_ost" gorm:"-"`
-	ExdID         uuid.UUID
+	ExdID         string  `json:"ext_id"`
 }
 
 type RemainsProduct struct {
