@@ -43,15 +43,6 @@ type Property struct {
 	ParentProp uint
 }
 
-type CollectionProduct struct {
-	Model
-	CollectionId     uint
-	Name             string
-	BagesUrl         string
-	Product          []Product          `json:"products" gorm:"many2many:collection_products"`
-	ParentCollection *CollectionProduct `json:"parrent_collection" gorm:"foreignKey:CollectionId"`
-}
-
 type CategoryProduct struct {
 	Model
 	ExtId  uuid.UUID `json:"uid"`
@@ -61,8 +52,8 @@ type CategoryProduct struct {
 
 	ParentCategory      *CategoryProduct `json:"child_category" gorm:"-"`
 	ParentCategoryExtID uuid.UUID        `json:"parent_uid"`
-
-	Products []Product `json:"products" gorm:"many2many:collectionId_products"`
+	ProductsExtID       []string         `json:"products_uid" gorm:"-"`
+	Products            []Product        `json:"products" gorm:"many2many:collectionId_products"`
 }
 
 type DataCategorySite struct {

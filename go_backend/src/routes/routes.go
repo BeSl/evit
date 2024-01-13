@@ -58,6 +58,7 @@ func setAdminRoute(api fiber.Router) {
 	adminAuthenticated.Get("orders", controllers.Orders)
 
 	adminAuthenticated.Post("newcontacts", controllers.UpdateContact)
+	adminAuthenticated.Post("fillcategory/:id", controllers.FillCategoryProduct)
 }
 
 func setAmbassadorRoute(api fiber.Router) {
@@ -73,6 +74,8 @@ func setAmbassadorRoute(api fiber.Router) {
 	ambassador.Get("productstest", controllers.TestAdvOffer)
 	ambassador.Get("contacts", controllers.Contacts)
 	ambassador.Get("actions", controllers.AdvPages)
+	ambassador.Post("addwishlist/:id", controllers.AddWishList)
+	ambassador.Get("userwislist", controllers.UserWishList)
 
 	ambassadorAuthenticated := ambassador.Use(middlewares.IsAuthenticated)
 	ambassadorAuthenticated.Get("user", controllers.User)

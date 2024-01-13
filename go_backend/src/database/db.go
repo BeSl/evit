@@ -31,8 +31,8 @@ func AutoMigrate() {
 		models.ValueProperty{},
 		models.AdvOffers{},
 		models.AdversCategory{},
-		models.CollectionProduct{},
 		models.CategoryProduct{},
 		models.ContactOrgInfo{},
+		models.WhishListUser{},
 	)
 }

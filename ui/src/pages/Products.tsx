@@ -3,23 +3,23 @@ import { Product } from "../models/product";
 import { Filters } from "../models/filters";
 import axios from "axios";
 import { Button, Breadcrumb, Badge, Flex, Card, Pagination, Typography } from 'antd';
-import { AppstoreOutlined, HeartOutlined, SendOutlined, UserOutlined, DatabaseTwoTone, HeartTwoTone, ShoppingCartOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, HeartOutlined, HeartFilled, UserOutlined, DatabaseTwoTone, HeartTwoTone, ShoppingCartOutlined } from '@ant-design/icons';
 import Icon from '@ant-design/icons';
 import type { PaginationProps } from 'antd';
 import { Form, message } from 'antd';
 
 const cardStyle: React.CSSProperties = {
-    width: 600,
+    width: 100,
 };
 
 const imgStyle: React.CSSProperties = {
     display: 'block',
-    width: 273,
+    width: 200,
 };
 const { Meta } = Card;
 const gridStyle: React.CSSProperties = {
-    width: '20%',
-    height: '15%',
+    width: '98%',
+    // height: '25%',
 
     textAlign: 'center',
     padding: '24px',
@@ -39,6 +39,7 @@ const Products = (props: {
         error: false,
         message: ''
     });
+
 
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -111,9 +112,14 @@ const Products = (props: {
     const addCart = () => {
         success("Добавлено в заказ");
     }
-    
-    const addWishList = (name: string) =>{
-success("Добавлено в избранное "+name);
+
+    const addWishList = (prod: Product) => {
+        if (prod.wishlist_user == true) {
+            success("Убрал из избранного " + prod.title);
+        } else {
+            success("Добавлено в избранное " + prod.title);
+        }
+        axios.post(`addwishlist/${prod.id}`);
     }
     return (
         <>
@@ -121,10 +127,10 @@ success("Добавлено в избранное "+name);
                 <Breadcrumb.Item>Золото</Breadcrumb.Item>
                 <Breadcrumb.Item>Браслеты</Breadcrumb.Item>
             </Breadcrumb>
-            <Card title="Наши товары">
+            <Card title="Товары" size="small">
                 {props.products.map(product => {
                     return (
-                        <Card.Grid 
+                        <Card.Grid
                             hoverable >
                             <Flex justify="space-between">
                                 <Badge.Ribbon text="Осталось мало" color="red">
@@ -134,26 +140,34 @@ success("Добавлено в избранное "+name);
                                         style={imgStyle}
                                     />
                                 </Badge.Ribbon>
-                                <Flex vertical align="flex-end" justify="space-between" style={{ padding: 12 }}>
-                                <Flex align="flex-end" justify="space-between" style={{ padding: 0 }}>
-                                <>
-                                {contextHolder}
-                                <HeartOutlined onClick={()=>addWishList(product.title)} style={{ color: '#f5222d', fontSize:20 }} />
-                                </>
-                                </Flex>
+                                <Flex vertical align="flex-end" justify="space-between" style={{ padding: 10 }}>
+                                    <Flex align="flex-end" justify="space-between" style={{ padding: 10 }}>
+                                        <>
+                                            {contextHolder}
+
+                                            {(product.wishlist_user) &&
+                                                <HeartFilled onClick={() => addWishList(product)} style={{ color: '#f5222d', fontSize: 20 }} />
+                                            }
+                                            {(product.wishlist_user == false) &&
+                                             
+                                               <HeartOutlined onClick={() => addWishList(product)} style={{ color: '#f5222d', fontSize: 20 }} />
+                }
+
+                                        </>
+                                    </Flex>
                                     <Typography.Title level={3}>
                                         {product.title}
                                     </Typography.Title>
                                     <Typography.Title level={5}>
                                         {product.description}
                                     </Typography.Title>
-                                    <Typography.Text delete>$9999</Typography.Text>
-                                    <Typography.Text type="success">${product.price}</Typography.Text>
+                                    <Typography.Text delete>${product.price}</Typography.Text>
+                                    <Typography.Text type="success">${product.price_action}</Typography.Text>
                                     <>
-                                {contextHolder}
-                                    <Button onClick={addCart}   target="_blank">
-                                        В заказ 
-                                    </Button>
+                                        {contextHolder}
+                                        <Button onClick={addCart} target="_blank">
+                                            В заказ
+                                        </Button>
                                     </>
                                 </Flex>
                             </Flex>

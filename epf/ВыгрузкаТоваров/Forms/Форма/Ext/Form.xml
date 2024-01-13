@@ -87,11 +87,50 @@
 												<CommandName>Form.Command.СписокНоменклатуры</CommandName>
 												<ExtendedTooltip name="СписокНоменклатурыРасширеннаяПодсказка" id="17"/>
 											</Button>
-											<Button name="ВыгрузитьТовары" id="12">
-												<Type>CommandBarButton</Type>
-												<CommandName>Form.Command.ВыгрузитьТовары</CommandName>
-												<ExtendedTooltip name="ВыгрузитьТоварыРасширеннаяПодсказка" id="13"/>
-											</Button>
+											<Popup name="ТоварыГруппа7" id="198">
+												<Title>
+													<v8:item>
+														<v8:lang>ru</v8:lang>
+														<v8:content>На сайт</v8:content>
+													</v8:item>
+												</Title>
+												<ExtendedTooltip name="ТоварыГруппа7РасширеннаяПодсказка" id="199"/>
+												<ChildItems>
+													<Button name="ВыгрузитьТовары" id="12">
+														<Type>CommandBarButton</Type>
+														<CommandName>Form.Command.ВыгрузитьТовары</CommandName>
+														<Title>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Создать</v8:content>
+															</v8:item>
+														</Title>
+														<ExtendedTooltip name="ВыгрузитьТоварыРасширеннаяПодсказка" id="13"/>
+													</Button>
+													<Button name="ТоварыТовары_Удалить" id="194">
+														<Type>CommandBarButton</Type>
+														<CommandName>Form.Command.Товары_Удалить</CommandName>
+														<Title>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Удалить</v8:content>
+															</v8:item>
+														</Title>
+														<ExtendedTooltip name="ТоварыТовары_УдалитьРасширеннаяПодсказка" id="195"/>
+													</Button>
+													<Button name="ТоварыТовары_Обновить" id="196">
+														<Type>CommandBarButton</Type>
+														<CommandName>Form.Command.Товары_Обновить</CommandName>
+														<Title>
+															<v8:item>
+																<v8:lang>ru</v8:lang>
+																<v8:content>Обновить</v8:content>
+															</v8:item>
+														</Title>
+														<ExtendedTooltip name="ТоварыТовары_ОбновитьРасширеннаяПодсказка" id="197"/>
+													</Button>
+												</ChildItems>
+											</Popup>
 										</ChildItems>
 									</AutoCommandBar>
 									<ExtendedTooltip name="ТоварыРасширеннаяПодсказка" id="24"/>
@@ -379,7 +418,15 @@
 											<DataPath>СтруктураКаталога.УидСсылки</DataPath>
 											<EditMode>EnterOnInput</EditMode>
 											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
-											<ContextMenu name="СтруктураКаталогаУидСсылкиКонтекстноеМеню" id="90"/>
+											<ContextMenu name="СтруктураКаталогаУидСсылкиКонтекстноеМеню" id="90">
+												<ChildItems>
+													<Button name="ВидыНоменклатуры_ВыгрузитьСостав" id="200">
+														<Type>CommandBarButton</Type>
+														<CommandName>Form.Command.ВидыНоменклатуры_ВыгрузитьСостав</CommandName>
+														<ExtendedTooltip name="ВидыНоменклатуры_ВыгрузитьСоставРасширеннаяПодсказка" id="201"/>
+													</Button>
+												</ChildItems>
+											</ContextMenu>
 											<ExtendedTooltip name="СтруктураКаталогаУидСсылкиРасширеннаяПодсказка" id="91"/>
 										</InputField>
 										<InputField name="СтруктураКаталогаУИДРодителя" id="92">
@@ -1268,6 +1315,50 @@
 				</v8:item>
 			</ToolTip>
 			<Action>ТоварыСопоставитьСВнешним</Action>
+		</Command>
+		<Command name="Товары_Обновить" id="10">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Товары обновить</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Товары обновить</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>Товары_Обновить</Action>
+		</Command>
+		<Command name="Товары_Удалить" id="11">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Товары удалить</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Товары удалить</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Action>Товары_Удалить</Action>
+		</Command>
+		<Command name="ВидыНоменклатуры_ВыгрузитьСостав" id="12">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Виды номенклатуры выгрузить состав</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Виды номенклатуры выгрузить состав</v8:content>
+				</v8:item>
+			</ToolTip>
 		</Command>
 	</Commands>
 </Form>

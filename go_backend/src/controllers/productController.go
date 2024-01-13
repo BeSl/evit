@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"gotemplate/src/database"
+	"gotemplate/src/middlewares"
 	"gotemplate/src/models"
 	"sort"
 	"strconv"
@@ -56,10 +57,9 @@ func UpdateProduct(c *fiber.Ctx) error {
 	if err := c.BodyParser(&product); err != nil {
 		return err
 	}
+	database.DB.Model(&product).Where("exd_id=?", product.ExdID).Select("*").Updates(&product)
 
-	database.DB.Model(&product).Updates(&product)
-
-	go database.ClearCache("products_frontend", "products_backend")
+	// go database.ClearCache("products_frontend", "products_backend")
 
 	return c.JSON(product)
 }
@@ -150,7 +150,29 @@ func ProductsBackend(c *fiber.Ctx) error {
 
 	var total = len(searchedProducts)
 	page, _ := strconv.Atoi(c.Query("page", "1"))
-	perPage := 9
+	perPage := 12
+
+	idUser, _ := middlewares.GetUserId(c)
+	var user models.User
+
+	if idUser != 0 {
+		database.DB.Where("id = ?", idUser).First(&user)
+
+	}
+
+	for i := range searchedProducts {
+		if len(searchedProducts[i].Description) > 100 {
+			searchedProducts[i].Description = searchedProducts[i].Description[0:100] + "..."
+		}
+
+		if idUser != 0 {
+			var WSU models.WhishListUser
+			res := database.DB.Model(&WSU).Where("user_id = ? and product_id = ?", idUser, searchedProducts[i].Id).First(&WSU).RowsAffected
+			if res != 0 {
+				searchedProducts[i].WhishListUser = true
+			}
+		}
+	}
 
 	var data []models.Product
 
@@ -179,17 +201,6 @@ func ActiveAdvers(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{
 		"data": advers,
-	})
-
-}
-
-func Collections(c *fiber.Ctx) error {
-	var collection []models.CollectionProduct
-
-	database.DB.Find(&collection)
-
-	return c.JSON(fiber.Map{
-		"data": collection,
 	})
 
 }

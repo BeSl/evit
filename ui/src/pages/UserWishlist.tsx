@@ -1,17 +1,9 @@
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import React from 'react';
+import React, {useEffect, useState}  from 'react';
 import { Avatar, List, Space } from 'antd';
 import LayoutM from '../components/Layout';
-
-const data = Array.from({ length: 23 }).map((_, i) => ({
-    href: 'https://ant.design',
-    title: `ant design part ${i}`,
-    avatar: `https://api.dicebear.com/7.x/miniavs/svg?seed=${i}`,
-    description:
-      'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-      'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  }));
+import axios from 'axios';
+import {Product} from "../models/product";
 
   const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
     <Space>
@@ -21,7 +13,21 @@ const data = Array.from({ length: 23 }).map((_, i) => ({
   );
 
 const UserWishlist = () => {
+  const [products, setProducts] = useState<Product[]>([]);
 
+  useEffect(() => {
+    (
+        async () => {
+            const arr = [];
+
+            const {data} = await axios.get(`userwislist`);
+
+            setProducts(data.data);
+            // setLastPage(data.meta.last_page);
+            // setFilters(data.)
+        }
+    )()
+},);
 return(
     <LayoutM>
     <h2>Избранное</h2>
@@ -34,12 +40,7 @@ return(
       },
       pageSize: 6,
     }}
-    dataSource={data}
-    footer={
-      <div>
-        <b>ant design</b> footer part
-      </div>
-    }
+    dataSource={products}
     renderItem={(item) => (
       <List.Item
         key={item.title}
@@ -52,16 +53,16 @@ return(
           <img
             width={272}
             alt="logo"
-            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+            src={item.image}
           />
         }
       >
         <List.Item.Meta
-          avatar={<Avatar src={item.avatar} />}
-          title={<a href={item.href}>{item.title}</a>}
+          avatar={<Avatar src={item.image} />}
+          title={<a href="{item.id}">{item.title}</a>}
           description={item.description}
         />
-        {item.content}
+        {/* {item.description} */}
       </List.Item>
     )}
   />

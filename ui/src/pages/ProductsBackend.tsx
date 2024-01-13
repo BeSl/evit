@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import LayoutM from "../components/Layout";
 import axios from 'axios';
-import { AppstoreOutlined, HeartOutlined, SendOutlined, UserOutlined, DatabaseTwoTone, HeartTwoTone, ShoppingCartOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Badge, Layout, Menu, Image, Tooltip, Button, Input, Flex, Avatar, message } from 'antd';
+import {Layout} from 'antd';
 import { AdverOffer } from '../models/adver';
 import ProductsTOP from '../pages/ProductsTOP';
 import Products from "../pages/Products";
@@ -41,6 +39,7 @@ const ProductsBackend = () => {
   
                 setProducts(filters.page === 1 ? data.data : [...products, ...data.data]);
                 setLastPage(data.meta.last_page);
+                // setFilters(data.)
             }
         )()
     }, [filters]);

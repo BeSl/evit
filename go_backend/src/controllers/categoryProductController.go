@@ -89,7 +89,21 @@ func NewCategory(c *fiber.Ctx) error {
 		}
 	}
 
-	database.DB.Create(&category)
+	database.DB.Where("ext_id = ?", category.ExtId.String()).First(&category)
+
+	for _, v := range category.ProductsExtID {
+		var product models.Product
+		database.DB.Model(&product).Where("exd_id = ?", v).First(&product)
+		if product.Id > 0 {
+			category.Products = append(category.Products, product)
+		}
+	}
+
+	if category.Id == 0 {
+		database.DB.Create(&category)
+	} else {
+		database.DB.Model(&category).Where("ext_id = ?", category.ExtId).Updates(&category)
+	}
 
 	return c.JSON(category)
 }
@@ -103,10 +117,15 @@ func ProductFromCategory(c *fiber.Ctx) error {
 	category := models.CategoryProduct{}
 	category.Id = uint(idCategory)
 
-	database.DB.Model(&category).Find(&category)
+	database.DB.Model(&category).Preload("Products").Find(&category)
 
 	return c.JSON(fiber.Map{
 		"data": category.Products,
+		"meta": fiber.Map{
+			"total":     50,
+			"page":      4,
+			"last_page": 1/2 + 1,
+		},
 	})
 }
 
@@ -138,6 +157,7 @@ func FillCategoryProduct(c *fiber.Ctx) error {
 	if category.Id == 0 {
 		return fiber.NewError(430, "Нет запрошенной категории")
 	}
+	database.DB.Model(&category).Updates(&category)
 
 	return c.JSON(nil)
 }
