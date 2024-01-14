@@ -2,7 +2,6 @@ package models
 
 import (
 	"golang.org/x/crypto/bcrypt"
-	"gorm.io/gorm"
 )
 
 type User struct {
@@ -29,46 +28,4 @@ func (user *User) ComparePassword(password string) error {
 
 func (user *User) Name() string {
 	return user.FirstName + " " + user.LastName
-}
-
-type Admin User
-
-func (admin *Admin) CalculateRevenue(db *gorm.DB) {
-	var orders []Order
-
-	db.Preload("OrderItems").Find(&orders, &Order{
-		UserId:   admin.Id,
-		Complete: true,
-	})
-
-	var revenue float64 = 0
-
-	for _, order := range orders {
-		for _, orderItem := range order.OrderItems {
-			revenue += orderItem.AdminRevenue
-		}
-	}
-
-	admin.Revenue = &revenue
-}
-
-type Ambassador User
-
-func (ambassador *Ambassador) CalculateRevenue(db *gorm.DB) {
-	var orders []Order
-
-	db.Preload("OrderItems").Find(&orders, &Order{
-		UserId:   ambassador.Id,
-		Complete: true,
-	})
-
-	var revenue float64 = 0.0
-
-	for _, order := range orders {
-		for _, orderItem := range order.OrderItems {
-			revenue += orderItem.AmbassadorRevenue
-		}
-	}
-
-	ambassador.Revenue = &revenue
 }

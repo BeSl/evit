@@ -9,9 +9,12 @@ type WhishListUser struct {
 
 type CartUser struct {
 	Model
-	UserId       uint
-	User         User
-	ProductId    uint
-	Product      Product
-	CountProduct int
+	UserId             uint
+	User               User    `gorm:"foreignKey:UserId"`
+	ProductId          uint    `json:"product_id"`
+	ProductName        string  `json:"product_name" gorm:"-"`
+	ProductDescription string  `json:"product_description" gorm:"-"`
+	Price              float64 `json:"price" gorm:"-"`
+	Product            Product `gorm:"foreignKey:ProductId"`
+	CountProduct       int     `json:"count"`
 }

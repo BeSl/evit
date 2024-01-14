@@ -109,8 +109,9 @@ const Products = (props: {
         )
     }
 
-    const addCart = () => {
-        success("Добавлено в заказ");
+    const addCart = (prod: Product) => {
+        success("Добавил в корзину " + prod.title);
+        axios.post(`cart/${prod.id}`);    
     }
 
     const addWishList = (prod: Product) => {
@@ -165,8 +166,8 @@ const Products = (props: {
                                     <Typography.Text type="success">${product.price_action}</Typography.Text>
                                     <>
                                         {contextHolder}
-                                        <Button onClick={addCart} target="_blank">
-                                            В заказ
+                                        <Button onClick={() => addCart(product)} target="_blank">
+                                            В корзину
                                         </Button>
                                     </>
                                 </Flex>

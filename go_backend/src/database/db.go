@@ -23,9 +23,6 @@ func Connect() {
 func AutoMigrate() {
 	DB.AutoMigrate(models.User{},
 		models.Product{},
-		models.Link{},
-		models.Order{},
-		models.OrderItem{},
 		models.Property{},
 		models.ProductDetail{},
 		models.ValueProperty{},
@@ -34,5 +31,6 @@ func AutoMigrate() {
 		models.CategoryProduct{},
 		models.ContactOrgInfo{},
 		models.WhishListUser{},
+		models.CartUser{},
 	)
 }

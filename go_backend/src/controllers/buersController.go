@@ -57,3 +57,69 @@ func UserWishList(c *fiber.Ctx) error {
 		"data": products,
 	})
 }
+
+func AddUserCart(c *fiber.Ctx) error {
+	id, _ := middlewares.GetUserId(c)
+
+	idProduct, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+
+	var cart models.CartUser
+
+	var user models.User
+	user.Id = id
+
+	var product models.Product
+	product.Id = uint(idProduct)
+
+	database.DB.Find(&user)
+	database.DB.Find(&product)
+
+	cart.Product = product
+	cart.User = user
+
+	database.DB.Model(&cart).Create(&cart)
+
+	return c.JSON(fiber.Map{
+		"result": "ok",
+	})
+}
+
+func DelUserCart(c *fiber.Ctx) error {
+	idCart, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+
+	var cart models.CartUser
+	cart.Id = uint(idCart)
+
+	database.DB.Delete(&cart)
+
+	return c.JSON(fiber.Map{
+		"result": "ok",
+	})
+}
+
+func UserCart(c *fiber.Ctx) error {
+	var carts []models.CartUser
+	id, _ := middlewares.GetUserId(c)
+	var user models.User
+	user.Id = id
+
+	database.DB.Model(&models.CartUser{}).Preload("Product").Where("user_id = ?", id).Find(&carts)
+
+	for i := range carts {
+		carts[i].ProductName = carts[i].Product.Title
+		carts[i].ProductId = carts[i].Product.Id
+		carts[i].ProductDescription = carts[i].Product.Description
+		carts[i].Price = carts[i].Product.PriceAction
+
+	}
+
+	return c.JSON(fiber.Map{
+		"data": carts,
+	})
+}

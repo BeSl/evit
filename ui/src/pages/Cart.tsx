@@ -1,11 +1,13 @@
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import React from 'react';
 import { Avatar, List, Space, Card, Button } from 'antd';
 import LayoutM from '../components/Layout';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Table} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Label } from '@mui/icons-material';
+import { UserCart } from '../models/cart';
+import React, {useEffect, useState}  from 'react';
+import axios from 'axios';
 
 interface DataType {
     key: React.Key;
@@ -16,43 +18,11 @@ interface DataType {
 }
 
 const { Meta } = Card;
-const data: DataType[] = [
-    {
-        key: 1,
-        name: 'John Brown',
-        price: 32,
-        count: 2,
-        description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-    },
-    {
-        key: 2,
-        name: 'Jim Green',
-        price: 42,
-        count: 2,
-        description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
-    },
-    {
-        key: 3,
-        name: 'Not Expandable',
-        price: 29,
-        count: 2,
-        description: 'This not expandable',
-    },
-    {
-        key: 4,
-        name: 'Joe Black',
-        price: 32,
-        count: 2,
-        description: 'My name is Joe Black, I am 32 years old, living in Sydney No. 1 Lake Park.',
-    },
-];
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<UserCart> = [
     Table.SELECTION_COLUMN,
     Table.EXPAND_COLUMN,
-    { title: 'Товар', dataIndex: 'name', key: 'name' },
-    
+    { title: 'Товар', dataIndex: 'product_name', key: 'product_name' },
     { title: 'Цена', dataIndex: 'price', key: 'price' },
-    
     { title: 'Количество', dataIndex: 'count', key: 'count' },
     {
         title: 'Action',
@@ -62,7 +32,24 @@ const columns: ColumnsType<DataType> = [
       },
 ];
 
+
 const Cart = () => {
+    const [carts, setCarts] = useState<UserCart[]>([]);
+    
+    useEffect(() => {
+        (
+            async () => {
+                const arr = [];
+    
+                const {data} = await axios.get(`cart`);
+    
+                setCarts(data.data);
+                // setLastPage(data.meta.last_page);
+                // setFilters(data.)
+            }
+        )()
+    },);
+
 
     return (
         <LayoutM>
@@ -71,9 +58,10 @@ const Cart = () => {
                 columns={columns}
                 rowSelection={{}}
                 expandable={{
-                    expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.description}</p>,
+                    expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.product_description}</p>,
+                    rowExpandable: (record) => record.product_name !== 'Not Expandable',
                 }}
-                dataSource={data}
+                dataSource={carts}
             />
             <Button>Оформить заказ</Button>
         </LayoutM>
