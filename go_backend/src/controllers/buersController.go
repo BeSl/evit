@@ -5,6 +5,8 @@ import (
 	"gotemplate/src/middlewares"
 	"gotemplate/src/models"
 	"strconv"
+	"strings"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -79,6 +81,7 @@ func AddUserCart(c *fiber.Ctx) error {
 
 	cart.Product = product
 	cart.User = user
+	cart.CountProduct = 1
 
 	database.DB.Model(&cart).Create(&cart)
 
@@ -121,5 +124,61 @@ func UserCart(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{
 		"data": carts,
+	})
+}
+
+type DataOrder struct {
+	Carts []uint `json:"carts"`
+}
+
+func NewOrder(c *fiber.Ctx) error {
+	var carts []models.CartUser
+	id, _ := middlewares.GetUserId(c)
+	var user models.User
+	user.Id = id
+	var data map[string]string
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	s := strings.Trim(data["carts"], "[]")
+	s = strings.Replace(s, " ", "", 0)
+	ds := strings.Split(s, ",")
+	for _, v := range ds {
+		tId, err := strconv.Atoi(v)
+		if err != nil {
+			continue
+		}
+		cart := models.CartUser{
+			Id: uint(tId),
+		}
+		carts = append(carts, cart)
+	}
+
+	database.DB.Where("id in (?)", ds).Find(&carts)
+
+	order := models.Order{
+		User:        user,
+		DateCreated: time.Now(),
+		Status:      1,
+	}
+	for _, v := range carts {
+		st := models.OrderSostav{
+			Product: v.Product,
+			Count:   float64(v.CountProduct),
+			Price:   v.Price,
+		}
+		st.Summa = st.Count * st.Price
+		order.Sostav = append(order.Sostav, st)
+	}
+
+	database.DB.Create(&order)
+
+	for i := range carts {
+		database.DB.Delete(carts[i])
+	}
+
+	return c.JSON(fiber.Map{
+		"data": order.NumberOrders(),
 	})
 }

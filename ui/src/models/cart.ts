@@ -1,6 +1,6 @@
 
 export interface UserCart {
-    id: number;
+    key: React.Key;
     count: number;
     selected: boolean;
     product_name: string;

@@ -84,5 +84,5 @@ func setAmbassadorRoute(api fiber.Router) {
 	ambassadorAuthenticated.Put("users/info", controllers.UpdateInfo)
 	ambassadorAuthenticated.Put("users/password", controllers.UpdatePassword)
 	ambassadorAuthenticated.Put("users/contacts", controllers.UpdateContactInfo)
-	ambassadorAuthenticated.Get("rankings", controllers.Rankings)
+	ambassadorAuthenticated.Post("neworder", controllers.NewOrder)
 }

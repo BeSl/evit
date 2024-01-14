@@ -32,5 +32,7 @@ func AutoMigrate() {
 		models.ContactOrgInfo{},
 		models.WhishListUser{},
 		models.CartUser{},
+		models.OrderSostav{},
+		models.Order{},
 	)
 }
